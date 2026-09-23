@@ -15,6 +15,12 @@ export const ThriveLogo: React.FC<ThriveLogoProps> = ({
 }) => {
   const [imgError, setImgError] = useState(false);
 
+  // Dynamically resolve base URL for GitHub Pages / sub-path hosting
+  const baseUrl = import.meta.env.BASE_URL || './';
+  const prefix = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  const markSrc = `${prefix}thrive-mark.png`;
+  const logoSrc = `${prefix}thrive-logo.png`;
+
   // Fallback SVG if image is somehow missing
   const FallbackMarkSvg = ({ s = 44 }: { s?: number }) => (
     <svg
@@ -46,7 +52,7 @@ export const ThriveLogo: React.FC<ThriveLogoProps> = ({
       <div className={`inline-flex items-center justify-center ${className}`}>
         {!imgError ? (
           <img
-            src="/thrive-mark.png"
+            src={markSrc}
             alt="Thrive Mark"
             style={{ height: dim, width: 'auto' }}
             className="object-contain"
@@ -67,7 +73,7 @@ export const ThriveLogo: React.FC<ThriveLogoProps> = ({
         {/* Genuine Icon Mark directly from uploaded logo */}
         {!imgError ? (
           <img
-            src="/thrive-mark.png"
+            src={markSrc}
             alt="Thrive Experience Emblem"
             style={{ height: markHeight, width: 'auto' }}
             className="object-contain drop-shadow-xs shrink-0 transition-transform duration-200 group-hover:scale-105"
@@ -107,7 +113,7 @@ export const ThriveLogo: React.FC<ThriveLogoProps> = ({
     return (
       <div className={`flex items-center gap-2 ${className}`}>
         <img
-          src="/thrive-mark.png"
+          src={markSrc}
           alt="Thrive Mark"
           className="h-7 w-auto object-contain"
         />
@@ -127,7 +133,7 @@ export const ThriveLogo: React.FC<ThriveLogoProps> = ({
   return (
     <div className={`flex flex-col items-center justify-center ${className}`}>
       <img
-        src="/thrive-logo.png"
+        src={logoSrc}
         alt="THRIVE EXPERIENCE - EVENT • GATHERING • TEAM BUILDING • ADVENTURE - CREATE • CONNECT • GROW"
         className="w-full h-auto max-w-[320px] sm:max-w-[380px] object-contain rounded-xl select-none"
       />
